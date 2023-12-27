@@ -1,6 +1,6 @@
 {
-  "assets/app.css": "/assets/app.css",
-  "assets/app.js": "/assets/app.js",
-  "assets/css/additional/app2.css": "/assets/css/additional/app2.css",
-  "assets/css/app.css": "/assets/css/app.css"
+  "assets/app.css": "http://localhost:8080/assets/app.css",
+  "assets/app.js": "http://localhost:8080/assets/app.js",
+  "assets/css/additional/app2.css": "http://localhost:8080/assets/css/additional/app2.css",
+  "assets/css/app.css": "http://localhost:8080/assets/css/app.css"
 }
