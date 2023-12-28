@@ -68,6 +68,11 @@ Encore.copyFiles({
   to: 'css/[path][name].[ext]',
 })
 
+Encore.copyFiles({
+  from: './resources/files',
+  to: 'files/[path][name].[ext]',
+})
+
 // Code Mirror
 
 /*

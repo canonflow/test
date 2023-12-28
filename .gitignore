@@ -9,3 +9,4 @@ ecosystem.config.js
 .idea/*
 public/assets/*
 public/storage/*
+resources/files/*
