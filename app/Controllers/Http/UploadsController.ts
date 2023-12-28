@@ -20,7 +20,7 @@ export default class UploadsController {
         const resourcesName = `test-resources.${image.extname}`
 
         await image.move(publicPath, {
-          name: pubilcName,
+          name: publicName,
         })
 
         spawn('cp ', [`${publicPath}/${publicName}`, `${resourcesPath}/${resourcesName}`])
