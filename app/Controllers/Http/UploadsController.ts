@@ -11,16 +11,19 @@ export default class UploadsController {
     if (imageResources !== null && imagePublic) {
       // Kalo di server
       if (Application.inProduction) {
+        // === testing ===
+        const path = Application.makePath('./')
+        return response.send({ path })
         // Simpan server
-        await imageResources.moveToDisk('./', { name: `test1.${imageResources.extname}` })
-        // Simpan di build
-        await imagePublic.move(Application.appRoot + '/public/assets/files', {
-          name: `test1.${imagePublic.extname}`,
-        })
-
-        const resourcePath = imageResources.filePath
-        const publicPath = imagePublic.filePath
-        return response.send({ resourcePath, publicPath })
+        // await imageResources.moveToDisk('./', { name: `test1.${imageResources.extname}` })
+        // // Simpan di build
+        // await imagePublic.move(Application.appRoot + '/public/assets/files/', {
+        //   name: `test1.${imagePublic.extname}`,
+        // })
+        //
+        // const resourcePath = imageResources.filePath
+        // const publicPath = imagePublic.filePath
+        // return response.send({ resourcePath, publicPath })
       }
       // await image.moveToDisk('./', { name: `test.${image.extname}` })
       // const file = await Drive.get(`./test.${image.extname}`).toString()
