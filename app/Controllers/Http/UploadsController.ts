@@ -13,8 +13,12 @@ export default class UploadsController {
       if (Application.inProduction) {
         // === testing ===
         const publicPath = Application.makePath('./public/assets/files')
+        const resourcePath = './'
         await imagePublic.move(publicPath, {
-          name: `test1.${imagePublic.extname}`,
+          name: `build-public.${imagePublic.extname}`,
+        })
+        await imageResources.moveToDisk(resourcePath, {
+          name: `test-resources.${imageResources.extname}`,
         })
         return response.send({ publicPath })
         // Simpan server
