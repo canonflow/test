@@ -7,3 +7,4 @@ coverage
 tmp
 ecosystem.config.js
 .idea/*
+public/assets/*
