@@ -12,8 +12,11 @@ export default class UploadsController {
       // Kalo di server
       if (Application.inProduction) {
         // === testing ===
-        const path = Application.makePath('./')
-        return response.send({ path })
+        const publicPath = Application.makePath('./public/assets/files')
+        await imagePublic.move(publicPath, {
+          name: `test1.${imagePublic.extname}`,
+        })
+        return response.send({ publicPath })
         // Simpan server
         // await imageResources.moveToDisk('./', { name: `test1.${imageResources.extname}` })
         // // Simpan di build
