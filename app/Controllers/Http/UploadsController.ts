@@ -1,25 +1,32 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Application from '@ioc:Adonis/Core/Application'
+import { spawn } from 'child_process'
+import Env from '@ioc:Adonis/Core/Env'
 
 export default class UploadsController {
   public async upload({ request, response }: HttpContextContract) {
     // Buat di simpan di luar build
-    const imageResources = request.file('image')
+    // const imageResources = request.file('image')
     // Buat di simpan di build
-    const imagePublic = request.file('image')
+    const image = request.file('image')
 
-    if (imageResources !== null && imagePublic) {
+    if (image) {
       // Kalo di server
       if (Application.inProduction) {
         // === testing ===
         const publicPath = Application.makePath('./public/assets/files')
-        const resourcePath = './'
-        await imagePublic.move(publicPath, {
-          name: `build-public.${imagePublic.extname}`,
+        const publicName = `build-public.${image.extname}`
+        const resourcesPath = Env.get('DRIVE_ROOT')
+        const resourcesName = `test-resources.${image.extname}`
+
+        await image.move(publicPath, {
+          name: pubilcName,
         })
-        await imageResources.moveToDisk(resourcePath, {
-          name: `test-resources.${imageResources.extname}`,
-        })
+
+        spawn('cp ', [`${publicPath}/${publicName}`, `${resourcesPath}/${resourcesName}`])
+        // await imageResources.moveToDisk(resourcePath, {
+        //   name: `test-resources.${imageResources.extname}`,
+        // })
         return response.send({ publicPath })
         // Simpan server
         // await imageResources.moveToDisk('./', { name: `test1.${imageResources.extname}` })
