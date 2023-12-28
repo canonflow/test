@@ -23,12 +23,26 @@ export default class UploadsController {
           name: publicName,
         })
 
-        exec(`cp "${publicPath}/${publicName}" "${resourcesPath}/${resourcesName}"`)
+        let errorStr = ''
+        let stdoutStr = ''
+        let stderrStr = ''
+        exec(
+          `cp "${publicPath}/${publicName}" "${resourcesPath}/${resourcesName}"`,
+          (error, stdout, stderr) => {
+            if (error) {
+              errorStr += error.toString()
+            }
+            if (stderr) {
+              stderrStr += stderr.toString()
+            }
+            stdoutStr += stdout.toString()
+          }
+        )
 
         // await imageResources.moveToDisk(resourcePath, {
         //   name: `test-resources.${imageResources.extname}`,
         // })
-        return response.send({ publicPath })
+        return response.send({ publicPath, errorStr, stderrStr, stdoutStr })
         // Simpan server
         // await imageResources.moveToDisk('./', { name: `test1.${imageResources.extname}` })
         // // Simpan di build
