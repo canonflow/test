@@ -1,6 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Application from '@ioc:Adonis/Core/Application'
-import { spawn } from 'child_process'
+import { exec } from 'child_process'
 import Env from '@ioc:Adonis/Core/Env'
 
 export default class UploadsController {
@@ -23,7 +23,8 @@ export default class UploadsController {
           name: publicName,
         })
 
-        spawn('cp ', [`${publicPath}/${publicName}`, `${resourcesPath}/${resourcesName}`])
+        exec(`cp "${publicPath}/${publicName}" "${resourcesPath}/${resourcesName}"`)
+
         // await imageResources.moveToDisk(resourcePath, {
         //   name: `test-resources.${imageResources.extname}`,
         // })
